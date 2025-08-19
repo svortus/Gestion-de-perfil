@@ -7,8 +7,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from config import test_db_connection, ServerConfig
 
-from auth.middleware import LoggingMiddleware
-from auth.routers import user, auth
+
+from gestion_perfil.routers import user
 
 
 def create_app():
@@ -55,7 +55,6 @@ def create_app():
         allowed_hosts=["localhost", "127.0.0.1"]
     )
 
-    app.add_middleware(LoggingMiddleware)
 
     return app
 
@@ -63,12 +62,11 @@ def create_app():
 app = create_app()
 
 # Esquema oauth
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
 
 # ==================== AUTENTICACIÓN Y USUARIOS ====================
-app.include_router(auth.router, prefix="/api/v1/auth", tags=["Autenticación"])
+# app.include_router(auth.router, prefix="/api/v1/auth", tags=["Autenticación"])
 
-app.include_router(user.router, prefix="/api/v1/users", tags=["Usuarios"])
+# app.include_router(user.router, prefix="/api/v1/users", tags=["Usuarios"])
 
 # ==================== ENDPOINTS DE UTILIDAD ====================
 
