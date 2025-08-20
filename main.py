@@ -5,8 +5,8 @@ from fastapi import FastAPI
 from fastapi.security import OAuth2PasswordBearer
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
-from config import test_db_connection, ServerConfig
-
+from config.config import ServerConfig
+from config.database import test_db_connection
 
 from gestion_perfil.routers import user
 
@@ -66,7 +66,7 @@ app = create_app()
 # ==================== AUTENTICACIÓN Y USUARIOS ====================
 # app.include_router(auth.router, prefix="/api/v1/auth", tags=["Autenticación"])
 
-# app.include_router(user.router, prefix="/api/v1/users", tags=["Usuarios"])
+app.include_router(user.router, prefix="/api/v1/users", tags=["Usuarios"])
 
 # ==================== ENDPOINTS DE UTILIDAD ====================
 

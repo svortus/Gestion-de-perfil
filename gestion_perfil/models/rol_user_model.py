@@ -1,6 +1,9 @@
 from sqlalchemy import Column, Integer, String
-from config.database import Base  # Asegúrate de tener bien importado esto
+from sqlalchemy.ext.asyncio import AsyncAttrs
+from sqlalchemy.orm import DeclarativeBase
 
+class Base(AsyncAttrs, DeclarativeBase):
+    pass
 
 class RolUsuario(Base):
     __tablename__ = "rol_usuario"

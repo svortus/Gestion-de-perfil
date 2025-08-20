@@ -7,7 +7,7 @@ class UserService:
     def __init__(self, db: AsyncSession):
         self.repository = UserRepository(db)
 
-    async def update_user(self, cedula: int, user) -> UsuarioDTO:
+    async def update_user(self, cedula: str, user) -> UsuarioDTO:
         result = await self.repository.update_user(cedula, user)
         if not result:
             return []

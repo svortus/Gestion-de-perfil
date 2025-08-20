@@ -1,7 +1,8 @@
-from typing import Optional
+from typing import Optional, TypeVar
 from pydantic import BaseModel, EmailStr
 from datetime import date, datetime
 
+T = TypeVar("T")
 
 class BaseDTO(BaseModel):
 
@@ -20,7 +21,7 @@ class UsuarioDTO(BaseDTO):
     nombres: str
     apellidos: str
     celular: str
-    contrasena: str
+    password_hash: str
     bool_status: bool
     created_at: datetime
     updated_at: Optional[date]
@@ -31,4 +32,9 @@ class UsuarioDTO(BaseDTO):
 class RUsuarioDTO(UsuarioDTO):
     rol: RolUsuarioDTO
 
+
+class UpdateUsuarioDTO(BaseDTO):
+    email: str
+    nombres: str
+    apellidos: str
 
