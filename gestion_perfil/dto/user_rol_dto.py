@@ -38,3 +38,5 @@ class UpdateUsuarioDTO(BaseDTO):
     nombres: str
     apellidos: str
 
+class UpdateUsuarioPasswordDTO(BaseDTO):
+    password_hash: str

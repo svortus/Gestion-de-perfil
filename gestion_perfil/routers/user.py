@@ -19,6 +19,19 @@ async def update_user(cedula: str, user_data: UpdateUsuarioDTO, db: AsyncSession
         if not updated_user:
             return ResponseSchema(detail="User not found", result=None)
         return ResponseSchema(detail="User updated successfully", result=updated_user)
-        return updated_user
+    except Exception as e:
+        return ResponseSchema(detail=f"An error occurred: {str(e)}", result=None)
+    
+@router.patch("/{cedula}/password", response_model=ResponseSchema, response_model_exclude_none=True)
+async def update_user_password(cedula: str, new_password: str, db: AsyncSession = Depends(get_session)):
+    """
+    Update user password by cedula.
+    """
+    try:
+        service = UserService(db)
+        updated_user = await service.update_user_password(cedula, new_password)
+        if not updated_user:
+            return ResponseSchema(detail="User not found", result=None)
+        return ResponseSchema(detail="Password updated successfully", result=updated_user)
     except Exception as e:
         return ResponseSchema(detail=f"An error occurred: {str(e)}", result=None)
